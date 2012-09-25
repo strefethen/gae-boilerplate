@@ -839,14 +839,16 @@ class ContactHandler(BaseHandler):
             # windows uses 'os' while other os use 'flavor'
             ua = httpagentparser.detect(user_agent)
             os = ua.has_key('flavor') and 'flavor' or 'os'
+            browser = str(ua['browser']['name'])
+			browser_version = str(ua['browser']['version'])
+			operating_system = str(ua[os]['name']) + " " + str(ua[os]['version'])
             
             template_val = {
                 "name": name,
                 "email": email,
-                "browser": str(ua['browser']['name']),
-                "browser_version": str(ua['browser']['version']),
-                "operating_system": str(ua[os]['name']) + " " +
-                                    str(ua[os]['version']),
+                "browser": browser,
+                "browser_version": browser_version,
+                "operating_system": operating_system,
                 "ip": remoteip,
                 "message": message
             }
